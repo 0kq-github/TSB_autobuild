@@ -6,5 +6,5 @@ https://tsb.scriptarts.jp/
 rootまたはsudoが使えるユーザーで実行してください
 
 ```bash
-wget https://raw.githubusercontent.com/0kq-github/TSB_autobuild/main/tsb.sh && sudo ./tsb.sh
+wget https://raw.githubusercontent.com/0kq-github/TSB_autobuild/main/tsb.sh && chmod +x tsb.sh && sudo ./tsb.sh
 ```
