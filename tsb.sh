@@ -45,6 +45,7 @@ function build () {
  echo "motd=\u00A7eThe\u00A7a Sky\u00A7d Blessing \u00a76v0.0.1 \u00A7f- \u00A7b1.17.1" >> server.properties
  chmod 777 start.sh
  echo "eula=true" > eula.txt
+ echo "構築が完了しました"
  read -p "サーバーを起動しますか？(y/n)" runserver 
  if [ $runserver = y ] ; then
   echo "TSB v0.0.1を起動中..."
