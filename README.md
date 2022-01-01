@@ -1,4 +1,4 @@
-# 魔導の箱庭自動構築スクリプト for Linux
+# TSB簡易構築スクリプト for Linux
 Ubuntu20.04.3で動作確認済み  
 本家はこちら  
 https://tsb.scriptarts.jp/
