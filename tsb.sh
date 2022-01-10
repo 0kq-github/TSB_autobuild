@@ -63,7 +63,7 @@ function build () {
 if [ $USER = root ]; then
  echo "###############################################################"
  echo ""
- echo "TSB beta0.0.1 自動セットアップ for Linux by 0kq"
+ echo "TSB v0.0.2 自動セットアップ for Linux by 0kq"
  echo "本家URL https://tsb.scriptarts.jp/"
  echo "eula https://www.minecraft.net/ja-jp/terms/r3/"
  echo ""
