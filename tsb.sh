@@ -33,20 +33,24 @@ function build () {
  else
   :
  fi
+ tsbrplatest=$(curl -s https://api.github.com/repos/ProjectTSB/TSB-ResourcePack/releases/latest | grep "resources.zip" | cut -d : -f 2,3 | tr -d \" | grep "/resources\.zip")
  wget -O server.jar https://launcher.mojang.com/v1/objects/a16d67e5807f57fc4e550299cf20226194497dc2/server.jar
  cd world
- wget -O tsb.zip https://github.com/ProjectTSB/TheSkyBlessing/releases/download/v0.0.1/TheSkyBlessing.zip
+ tsblatest=$(curl -s https://api.github.com/repos/ProjectTSB/TheSkyBlessing/releases/latest | grep "TheSkyBlessing.zip" | cut -d : -f 2,3 | tr -d \" | grep "/TheSkyBlessing\.zip")
+ wget -O tsb.zip $tsblatest
  unzip tsb.zip
+ rm resources.zip
  cd ..
  echo java -Dlog4j2.formatMsgNoLookups=true -Xmx$mem -Xms$mem -server -jar server.jar nogui > start.sh
  echo "server-port=${mcport}" > server.properties
  echo "gamemode=adventure" >> server.properties
  echo "difficulty=normal" >> server.properties
+ echo "resource-pack=$tsbrplatest" >> server.properties
  echo "motd=\u00A7eThe\u00A7a Sky\u00A7d Blessing \u00a76v0.0.1 \u00A7f- \u00A7b1.17.1" >> server.properties
  chmod 777 start.sh
  echo "eula=true" > eula.txt
  echo "構築が完了しました"
- read -p "サーバーを起動しますか？(y/n)" runserver 
+ read -p "サーバーを起動しますか？(y/n): " runserver 
  if [ $runserver = y ] ; then
   echo "TSB v0.0.1を起動中..."
   ./start.sh
