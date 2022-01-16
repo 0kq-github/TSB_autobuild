@@ -2,11 +2,19 @@
 set EULA=
 set mem=
 set mcport=
-set tsbver=The Sky Blessing v0.0.1
+echo バージョンを取得中...
+for /f "usebackq delims=" %%A in (`curl https://api.github.com/repos/ProjectTSB/TheSkyBlessing/releases/latest ^| findstr /r /c:"\"browser_download_url\": \"https://.*\TheSkyBlessing.zip\""`) do set tsblatest=%%A
+set tsblatest=%tsblatest: =%
+set tsblatest=%tsblatest:"browser_download_url":"=%
+set tsblatest=%tsblatest:"=%
+set tsbver=%tsblatest:https://github.com/ProjectTSB/TheSkyBlessing/releases/download/=%
+set tsbver=%tsbver:/TheSkyBlessing.zip=%
+title TSB %tsbver% セットアップ
 
+echo.
 echo ###############################################################
 echo.
-echo TSB v0.0.2 自動セットアップ for Windows by 0kq
+echo TSB %tsbver% 自動セットアップ for Windows by 0kq
 echo 本家URL https://tsb.scriptarts.jp/
 echo eula https://www.minecraft.net/ja-jp/terms/r3/
 echo.
@@ -58,10 +66,6 @@ set tsbrplatest=%tsbrplatest: =%
 set tsbrplatest=%tsbrplatest:"browser_download_url":"=%
 set tsbrplatest=%tsbrplatest:"=%
 
-for /f "usebackq delims=" %%A in (`curl https://api.github.com/repos/ProjectTSB/TheSkyBlessing/releases/latest ^| findstr /r /c:"\"browser_download_url\": \"https://.*\TheSkyBlessing.zip\""`) do set tsblatest=%%A
-set tsblatest=%tsblatest: =%
-set tsblatest=%tsblatest:"browser_download_url":"=%
-set tsblatest=%tsblatest:"=%
 curl -L -o server.jar https://launcher.mojang.com/v1/objects/a16d67e5807f57fc4e550299cf20226194497dc2/server.jar
 cd world
 curl -L -o tsb.zip %tsblatest%
@@ -69,7 +73,7 @@ call powershell -command "Expand-Archive -Path '.\tsb.zip' -DestinationPath '.\'
 del resources.zip
 cd ..
 echo @echo off>start.bat
-echo title %tsbver% - 1.17.1>>start.bat
+echo title TheSkyBlessing %tsbver% - 1.17.1>>start.bat
 echo java -Dlog4j2.formatMsgNoLookups=true -Xmx%mem% -Xms%mem% -server -jar server.jar nogui>>start.bat
 echo pause>>start.bat
 echo eula=true>eula.txt
@@ -77,13 +81,13 @@ echo server-port=%mcport%>server.properties
 echo gamemode=adventure>>server.properties
 echo difficulty=normal>>server.properties
 echo resource-pack=%tsbrplatest%>>server.properties
-echo motd=\u00A7eThe\u00A7a Sky\u00A7d Blessing \u00a76v0.0.1 \u00A7f- \u00A7b1.17.1>>server.properties
+echo motd=\u00A7eThe\u00A7a Sky\u00A7d Blessing \u00a76%tsbver% \u00A7f- \u00A7b1.17.1>>server.properties
 
 echo 構築が完了しました
 set runserver=
 set /P runserver="サーバーを起動しますか？(y/n): "
 if %runserver%==y (
-  echo %tsbver%を起動中...
+  echo TheSkyBlessing %tsbver%を起動中...
   start start.bat
 )
 pause
