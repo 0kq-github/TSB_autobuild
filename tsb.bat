@@ -2,6 +2,7 @@
 set EULA=
 set mem=
 set mcport=
+set mcver="1.19"
 echo バージョンを取得中...
 for /f "usebackq delims=" %%A in (`curl https://api.github.com/repos/ProjectTSB/TheSkyBlessing/releases/latest ^| findstr /r /c:"\"browser_download_url\": \"https://.*\TheSkyBlessing.zip\""`) do set tsblatest=%%A
 set tsblatest=%tsblatest: =%
@@ -66,14 +67,14 @@ set tsbrplatest=%tsbrplatest: =%
 set tsbrplatest=%tsbrplatest:"browser_download_url":"=%
 set tsbrplatest=%tsbrplatest:"=%
 
-curl -L -o server.jar https://launcher.mojang.com/v1/objects/a16d67e5807f57fc4e550299cf20226194497dc2/server.jar
+curl -L -o server.jar https://launcher.mojang.com/v1/objects/e00c4052dac1d59a1188b2aa9d5a87113aaf1122/server.jar
 cd world
 curl -L -o tsb.zip %tsblatest%
 call powershell -command "Expand-Archive -Path '.\tsb.zip' -DestinationPath '.\'"
 del resources.zip
 cd ..
 echo @echo off>start.bat
-echo title TheSkyBlessing %tsbver% - 1.17.1>>start.bat
+echo title TheSkyBlessing %tsbver% - %mcver%>>start.bat
 echo java -Dlog4j2.formatMsgNoLookups=true -Xmx%mem% -Xms%mem% -server -jar server.jar nogui>>start.bat
 echo pause>>start.bat
 echo eula=true>eula.txt
@@ -81,7 +82,7 @@ echo server-port=%mcport%>server.properties
 echo gamemode=adventure>>server.properties
 echo difficulty=normal>>server.properties
 echo resource-pack=%tsbrplatest%>>server.properties
-echo motd=\u00A7eThe\u00A7a Sky\u00A7d Blessing \u00a76%tsbver% \u00A7f- \u00A7b1.17.1>>server.properties
+echo motd=\u00A7eThe\u00A7a Sky\u00A7d Blessing \u00a76%tsbver% \u00A7f- \u00A7b%mcver%>>server.properties
 
 echo 構築が完了しました
 set runserver=

@@ -4,4 +4,4 @@ Windows10 20H2で動作確認済み
 https://tsb.scriptarts.jp/
 ## Usage
 [ここ](https://github.com/0kq-github/TSB_autobuild/releases/latest)からtsb-win.batをダウンロードして実行してください  
-Java16以上をインストールした環境で実行してください  
+Java17以上をインストールした環境で実行してください  
