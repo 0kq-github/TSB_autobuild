@@ -1,4 +1,5 @@
 #!/bin/bash
+mcver="1.19"
 
 function build () {
  read -p "eulaに同意しますか？(y/n): " eula
@@ -34,7 +35,7 @@ function build () {
   :
  fi
  tsbrplatest=$(curl -s https://api.github.com/repos/ProjectTSB/TSB-ResourcePack/releases/latest | grep "resources.zip" | cut -d : -f 2,3 | tr -d \" | grep "/resources\.zip")
- wget -O server.jar https://launcher.mojang.com/v1/objects/a16d67e5807f57fc4e550299cf20226194497dc2/server.jar
+ wget -O server.jar https://launcher.mojang.com/v1/objects/e00c4052dac1d59a1188b2aa9d5a87113aaf1122/server.jar
  cd world
  wget -O tsb.zip $tsblatest
  unzip tsb.zip
@@ -45,7 +46,7 @@ function build () {
  echo "gamemode=adventure" >> server.properties
  echo "difficulty=normal" >> server.properties
  echo "resource-pack=$tsbrplatest" >> server.properties
- echo "motd=\u00A7eThe\u00A7a Sky\u00A7d Blessing \u00a76$tsbversion \u00A7f- \u00A7b1.17.1" >> server.properties
+ echo "motd=\u00A7eThe\u00A7a Sky\u00A7d Blessing \u00a76$tsbversion \u00A7f- \u00A7b$mcver" >> server.properties
  chmod 777 start.sh
  echo "eula=true" > eula.txt
  echo "構築が完了しました"
