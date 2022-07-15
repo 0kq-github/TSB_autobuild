@@ -2,7 +2,7 @@
 set EULA=
 set mem=
 set mcport=
-set mcver="1.19"
+set mcver=1.19
 echo ƒo[ƒWƒ‡ƒ“‚ğæ“¾’†...
 for /f "usebackq delims=" %%A in (`curl https://api.github.com/repos/ProjectTSB/TheSkyBlessing/releases/latest ^| findstr /r /c:"\"browser_download_url\": \"https://.*\TheSkyBlessing.zip\""`) do set tsblatest=%%A
 set tsblatest=%tsblatest: =%
